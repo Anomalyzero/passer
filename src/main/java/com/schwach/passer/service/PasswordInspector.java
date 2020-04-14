@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service;
 public class PasswordInspector {
 
     public SimpleResponse validatePassword(String password){
-        return null;
+        return new SimpleResponse(true, "Password satisfies all criteria");
     }
 }
