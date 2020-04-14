@@ -14,10 +14,18 @@ class PasswordInspectorTest {
     private PasswordInspector inspector;
 
     @Test
-    void validatePassword_verifyMinimumLength(){
+    void validatePassword_verifyMinimumLengthExpectFail(){
         SimpleResponse response = inspector.validatePassword("min");
 
         assertFalse(response.getSuccess());
+        assertFalse(response.getMessage().isEmpty());
+    }
+
+    @Test
+    void validatePassword_verifyMinimumLengthExpectPass(){
+        SimpleResponse response = inspector.validatePassword("overminumum");
+
+        assertTrue(response.getSuccess());
         assertFalse(response.getMessage().isEmpty());
     }
 }
