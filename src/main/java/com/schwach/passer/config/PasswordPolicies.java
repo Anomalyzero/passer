@@ -22,6 +22,10 @@ public class PasswordPolicies {
     @Value("${policy.maximumLength}")
     private int maximumLength;
 
+    @NotBlank
+    @Value("${policy.charRegex}")
+    private String charRegex;
+
     private static List<PasswordPolicy> tests = new ArrayList<>();
 
     public List<PasswordPolicy> getTests() {
@@ -37,6 +41,12 @@ public class PasswordPolicies {
             Predicate<String> maxLenCheck = str -> str.length() <= maximumLength;
             tests.add(
                     new PasswordPolicy(maxLenCheck, String.format("Password is over maximum length of %d", maximumLength))
+            );
+
+            // Only lowercase letters & numbers
+            Predicate<String> allowedCharCheck = str -> str.matches(charRegex);
+            tests.add(
+                    new PasswordPolicy(allowedCharCheck, "Password must consist of lowercase letters, numbers and at least one of each")
             );
         }
         return tests;
