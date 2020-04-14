@@ -63,8 +63,10 @@ class PasswordInspectorTest {
         for (String password : invalidPasswords) {
             SimpleResponse response = inspector.validatePassword(password);
 
+            System.out.print("Password '" + password + "' ");
             assertFalse(response.getSuccess());
             assertFalse(response.getMessage().isEmpty());
+            System.out.print("passed!\n");
         }
     }
 
