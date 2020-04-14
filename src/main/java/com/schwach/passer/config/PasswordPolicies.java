@@ -28,7 +28,7 @@ public class PasswordPolicies {
         if(tests.isEmpty()) {
 
             // Minimum Length
-            Predicate<String> minLenCheck = str -> str.length() > minimumLength;
+            Predicate<String> minLenCheck = str -> str.length() >= minimumLength;
             tests.add(
                     new PasswordPolicy(minLenCheck, String.format("Password is under minimum length of %d", minimumLength))
             );
