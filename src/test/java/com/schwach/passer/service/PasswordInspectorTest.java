@@ -82,4 +82,35 @@ class PasswordInspectorTest {
         }
     }
 
+    @Test
+    void validatePassword_verifyDuplicateSequencesExpectFail(){
+        List<String> invalidPasswords = new ArrayList<>();
+        invalidPasswords.add("ab123123");
+        invalidPasswords.add("1212ab");
+        invalidPasswords.add("houndhound2");
+
+        for (String password : invalidPasswords) {
+            SimpleResponse response = inspector.validatePassword(password);
+
+            assertFalse(response.getSuccess());
+            assertFalse(response.getMessage().isEmpty());
+        }
+    }
+
+    @Test
+    void validatePassword_verifyDuplicateSequencesExpectSuccess(){
+        List<String> invalidPasswords = new ArrayList<>();
+        invalidPasswords.add("abcd1234");
+        invalidPasswords.add("catdog1");
+        invalidPasswords.add("b1b2b3b4");
+        invalidPasswords.add("hound2");
+
+        for (String password : invalidPasswords) {
+            SimpleResponse response = inspector.validatePassword(password);
+
+            assertTrue(response.getSuccess());
+            assertFalse(response.getMessage().isEmpty());
+        }
+    }
+
 }
