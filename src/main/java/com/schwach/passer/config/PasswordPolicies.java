@@ -30,7 +30,13 @@ public class PasswordPolicies {
             // Minimum Length
             Predicate<String> minLenCheck = str -> str.length() > minimumLength;
             tests.add(
-                    new PasswordPolicy(minLenCheck, String.format("Password does not meet minimum length of %d", minimumLength))
+                    new PasswordPolicy(minLenCheck, String.format("Password is under minimum length of %d", minimumLength))
+            );
+
+            // Maximum Length
+            Predicate<String> maxLenCheck = str -> str.length() <= maximumLength;
+            tests.add(
+                    new PasswordPolicy(maxLenCheck, String.format("Password is over maximum length of %d", maximumLength))
             );
         }
         return tests;

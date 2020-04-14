@@ -23,7 +23,23 @@ class PasswordInspectorTest {
 
     @Test
     void validatePassword_verifyMinimumLengthExpectPass(){
-        SimpleResponse response = inspector.validatePassword("overminumum");
+        SimpleResponse response = inspector.validatePassword("overminimum");
+
+        assertTrue(response.getSuccess());
+        assertFalse(response.getMessage().isEmpty());
+    }
+
+    @Test
+    void validatePassword_verifyMaximumLengthExpectFail(){
+        SimpleResponse response = inspector.validatePassword("overmaximumvalue");
+
+        assertFalse(response.getSuccess());
+        assertFalse(response.getMessage().isEmpty());
+    }
+
+    @Test
+    void validatePassword_verifyMaximumLengthExpectPass(){
+        SimpleResponse response = inspector.validatePassword("undermax");
 
         assertTrue(response.getSuccess());
         assertFalse(response.getMessage().isEmpty());
